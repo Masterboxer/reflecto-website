@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Reflecto on iPhone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --blue-1: #4b8ef8;
+        --blue-2: #6b5ffb;
+        --blue-light: #ebf2ff;
+        --ink: #0d0f14;
+        --ink-soft: #3a3d47;
+        --ink-muted: #8a8d99;
+        --surface: #fafbff;
+        --surface-2: #f2f5fc;
+        --white: #ffffff;
+        --radius: 20px;
+        --radius-lg: 32px;
+        --green: #10b981;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--surface);
+        color: var(--ink);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ─── NAV ─── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 40px;
+        background: rgba(250, 251, 255, 0.88);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(75, 142, 248, 0.08);
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Instrument Serif", serif;
+        font-size: 22px;
+        color: var(--ink);
+        text-decoration: none;
+      }
+      .logo-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: white;
+      }
+      .nav-back {
+        font-size: 14px;
+        color: var(--ink-muted);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.2s;
+      }
+      .nav-back:hover {
+        color: var(--blue-1);
+      }
+
+      /* ─── HERO ─── */
+      .hero {
+        padding: 130px 24px 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-glow {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse,
+          rgba(75, 142, 248, 0.12) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .pwa-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 142, 248, 0.12),
+          rgba(107, 95, 251, 0.12)
+        );
+        border: 1px solid rgba(75, 142, 248, 0.2);
+        color: var(--blue-1);
+        border-radius: 50px;
+        padding: 7px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 28px;
+        animation: fadeUp 0.5s ease both;
+      }
+      .pwa-badge svg {
+        flex-shrink: 0;
+      }
+
+      .hero h1 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(36px, 6vw, 72px);
+        line-height: 1.1;
+        max-width: 700px;
+        margin: 0 auto 20px;
+        animation: fadeUp 0.6s 0.1s ease both;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--blue-1);
+      }
+
+      .hero-sub {
+        font-size: 18px;
+        color: var(--ink-soft);
+        max-width: 480px;
+        margin: 0 auto 48px;
+        line-height: 1.65;
+        font-weight: 300;
+        animation: fadeUp 0.6s 0.2s ease both;
+      }
+
+      /* ─── SCREENSHOT STRIP ─── */
+      .screenshots {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 0 24px 60px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        animation: fadeUp 0.7s 0.3s ease both;
+      }
+      .screenshots::-webkit-scrollbar {
+        display: none;
+      }
+
+      .screenshot-frame {
+        flex-shrink: 0;
+        width: 200px;
+        scroll-snap-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .screenshot-frame.featured {
+        width: 220px;
+      }
+
+      .phone-shell {
+        width: 100%;
+        aspect-ratio: 9/19.5;
+        border-radius: 36px;
+        background: var(--white);
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.13),
+          0 0 0 1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s;
+      }
+      .phone-shell:hover {
+        transform: translateY(-6px);
+      }
+      .screenshot-frame.featured .phone-shell {
+        box-shadow:
+          0 32px 80px rgba(75, 142, 248, 0.2),
+          0 0 0 1.5px rgba(75, 142, 248, 0.3);
+      }
+
+      .phone-notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 72px;
+        height: 24px;
+        background: var(--ink);
+        border-radius: 0 0 16px 16px;
+        z-index: 2;
+      }
+
+      .phone-inner {
+        width: 100%;
+        height: 100%;
+        padding: 32px 12px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow: hidden;
+      }
+
+      .screenshot-label {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--ink-muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      /* Phone screen content helpers */
+      .ss-header {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--ink-muted);
+        text-align: center;
+        margin-bottom: 2px;
+      }
+      .ss-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 14px;
+        color: var(--ink);
+        line-height: 1.4;
+        padding: 6px 0;
+      }
+      .ss-entry {
+        background: var(--surface-2);
+        border-radius: 10px;
+        padding: 8px 10px;
+        font-size: 9px;
+        color: var(--ink-soft);
+        line-height: 1.5;
+      }
+      .ss-entry-name {
+        font-weight: 600;
+        color: var(--ink);
+        font-size: 9px;
+        margin-bottom: 2px;
+      }
+      .ss-bar {
+        height: 3px;
+        background: var(--blue-light);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-top: 6px;
+      }
+      .ss-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--blue-1), var(--blue-2));
+        border-radius: 2px;
+      }
+      .ss-compose {
+        margin-top: auto;
+        background: var(--blue-light);
+        border-radius: 10px;
+        padding: 8px;
+        font-size: 9px;
+        color: var(--blue-1);
+        font-weight: 500;
+        text-align: center;
+      }
+      .ss-big {
+        font-family: "Instrument Serif", serif;
+        font-size: 32px;
+        color: var(--blue-1);
+        text-align: center;
+        line-height: 1;
+      }
+      .ss-sub {
+        font-size: 9px;
+        color: var(--ink-muted);
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .ss-cal {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 3px;
+      }
+      .ss-cal-day {
+        aspect-ratio: 1;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 7px;
+        font-weight: 500;
+      }
+      .ss-cal-day.done {
+        background: rgba(75, 142, 248, 0.15);
+        color: var(--blue-1);
+      }
+      .ss-cal-day.today {
+        background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+        color: white;
+      }
+      .ss-cal-day.empty {
+        background: var(--surface-2);
+        color: var(--ink-muted);
+      }
+      .ss-feed-item {
+        display: flex;
+        gap: 6px;
+        align-items: flex-start;
+        background: var(--surface-2);
+        border-radius: 8px;
+        padding: 7px;
+      }
+      .ss-ava {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .ss-ava.a1 {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+      }
+      .ss-ava.a2 {
+        background: linear-gradient(135deg, #10b981, #3b82f6);
+      }
+      .ss-ava.a3 {
+        background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+      }
+      .ss-feed-text {
+        font-size: 8.5px;
+        color: var(--ink-soft);
+        line-height: 1.4;
+      }
+      .ss-feed-name {
+        font-weight: 600;
+        color: var(--ink);
+        font-size: 8.5px;
+      }
+      .ss-end {
+        font-size: 8.5px;
+        color: var(--ink-muted);
+        text-align: center;
+        padding: 4px 0;
+      }
+      .ss-textarea {
+        background: rgba(75, 142, 248, 0.07);
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 8.5px;
+        color: var(--ink-soft);
+        line-height: 1.5;
+        min-height: 50px;
+      }
+      .ss-count {
+        font-size: 8px;
+        color: var(--blue-1);
+        font-weight: 500;
+        text-align: right;
+        margin-top: 3px;
+      }
+
+      /* side phones slightly faded */
+      .screenshot-frame.side .phone-shell {
+        opacity: 0.75;
+        transform: scale(0.95);
+      }
+      .screenshot-frame.side .phone-shell:hover {
+        opacity: 1;
+        transform: scale(0.95) translateY(-6px);
+      }
+
+      /* ─── DIVIDER ─── */
+      .divider {
+        max-width: 1080px;
+        margin: 0 auto;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.06);
+      }
+
+      /* ─── BENEFITS ─── */
+      .benefits-section {
+        padding: 80px 24px;
+        background: var(--white);
+      }
+      .benefits-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .section-tag {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--blue-1);
+        margin-bottom: 16px;
+      }
+      .section-h {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(28px, 4vw, 46px);
+        line-height: 1.15;
+        color: var(--ink);
+        margin-bottom: 48px;
+      }
+      .section-h em {
+        font-style: italic;
+        color: var(--blue-1);
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .benefit-card {
+        background: var(--surface);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: var(--radius-lg);
+        padding: 28px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .benefit-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.07);
+      }
+
+      .benefit-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 142, 248, 0.12),
+          rgba(107, 95, 251, 0.12)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+      .benefit-card h3 {
+        font-family: "Instrument Serif", serif;
+        font-size: 20px;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+      .benefit-card p {
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.65;
+      }
+
+      /* ─── INSTALL STEPS ─── */
+      .install-section {
+        padding: 80px 24px;
+        background: var(--surface-2);
+      }
+      .install-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .install-inner .section-h {
+        margin-bottom: 16px;
+      }
+      .install-intro {
+        font-size: 17px;
+        color: var(--ink-soft);
+        line-height: 1.65;
+        font-weight: 300;
+        margin-bottom: 52px;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        text-align: left;
+        position: relative;
+      }
+
+      /* Vertical connector line */
+      .steps::before {
+        content: "";
+        position: absolute;
+        left: 21px;
+        top: 42px;
+        bottom: 42px;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--blue-1), var(--blue-2));
+        opacity: 0.2;
+        border-radius: 1px;
+      }
+
+      .step {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 24px 28px;
+        background: var(--white);
+        border-radius: var(--radius);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        position: relative;
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+        margin-bottom: 12px;
+      }
+      .step:last-child {
+        margin-bottom: 0;
+      }
+      .step:hover {
+        box-shadow: 0 8px 32px rgba(75, 142, 248, 0.1);
+        transform: translateX(4px);
+      }
+
+      .step-num {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(75, 142, 248, 0.3);
+        position: relative;
+        z-index: 1;
+      }
+
+      .step-body {
+        flex: 1;
+        padding-top: 10px;
+      }
+      .step-body h3 {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 4px;
+      }
+      .step-body p {
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.6;
+      }
+
+      .step-tip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        background: var(--blue-light);
+        color: var(--blue-1);
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      /* Icon illustration inside steps */
+      .step-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--surface-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+        margin-top: 8px;
+      }
+
+      /* ─── BOTTOM CTA ─── */
+      .bottom-cta {
+        padding: 100px 24px;
+        text-align: center;
+        background: var(--white);
+      }
+      .bottom-cta .section-h {
+        max-width: 520px;
+        margin: 0 auto 16px;
+      }
+      .bottom-cta-sub {
+        font-size: 17px;
+        color: var(--ink-soft);
+        font-weight: 300;
+        max-width: 440px;
+        margin: 0 auto 44px;
+        line-height: 1.65;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 16px 32px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: "DM Sans", sans-serif;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        box-shadow: 0 8px 32px rgba(75, 142, 248, 0.32);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(75, 142, 248, 0.42);
+      }
+
+      .cta-note {
+        font-size: 13px;
+        color: var(--ink-muted);
+        margin-top: 16px;
+      }
+
+      /* ─── FOOTER ─── */
+      footer {
+        background: var(--ink);
+        color: rgba(255, 255, 255, 0.5);
+        padding: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .footer-logo {
+        color: white;
+        font-family: "Instrument Serif", serif;
+        font-size: 20px;
+        text-decoration: none;
+      }
+      .footer-links {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: white;
+      }
+      .footer-copy {
+        font-size: 13px;
+      }
+
+      /* ─── ANIMATIONS ─── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 768px) {
+        nav {
+          padding: 14px 20px;
+        }
+        .hero {
+          padding: 100px 20px 40px;
+        }
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+        .screenshots {
+          padding-bottom: 40px;
+        }
+        .screenshot-frame.side {
+          display: none;
+        }
+        .screenshot-frame {
+          width: 200px;
+        }
+        .screenshot-frame.featured {
+          width: 220px;
+        }
+        footer {
+          padding: 32px 20px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .step:hover {
+          transform: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div class="logo-dot">✦</div>
+        Reflecto
+      </a>
+      <a href="index.html" class="nav-back"> ← Back </a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="pwa-badge">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+          <path d="M12 18h.01" />
+        </svg>
+        iPhone · Install as App
+      </div>
+      <h1>Reflecto on<br /><em>your iPhone.</em></h1>
+      <p class="hero-sub">
+        No App Store required. Add Reflecto to your Home Screen in seconds — it
+        works just like a native app.
+      </p>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <div class="screenshots" id="screenshots">
+      <!-- Side: Friends feed -->
+      <div class="screenshot-frame side">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <div class="ss-header">Friends</div>
+            <div class="ss-feed-item">
+              <div class="ss-ava a1"></div>
+              <div>
+                <div class="ss-feed-name">Maya</div>
+                <div class="ss-feed-text">
+                  Had the best afternoon reading in the park. First time in
+                  weeks I felt fully present.
+                </div>
+              </div>
+            </div>
+            <div class="ss-feed-item">
+              <div class="ss-ava a2"></div>
+              <div>
+                <div class="ss-feed-name">Rohan</div>
+                <div class="ss-feed-text">
+                  Cooked something new tonight. Turned out great somehow 😄
+                </div>
+              </div>
+            </div>
+            <div class="ss-feed-item">
+              <div class="ss-ava a3"></div>
+              <div>
+                <div class="ss-feed-name">Priya</div>
+                <div class="ss-feed-text">
+                  Long walk with no destination. Exactly what I needed.
+                </div>
+              </div>
+            </div>
+            <div class="ss-end">✓ You're caught up. Come back tomorrow.</div>
+          </div>
+        </div>
+        <div class="screenshot-label">Friends Feed</div>
+      </div>
+
+      <!-- Center: Write today -->
+      <div class="screenshot-frame featured">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <div class="ss-header">Today</div>
+            <div class="ss-title">"What made today different?"</div>
+            <div class="ss-textarea">
+              Walked home instead of taking the metro. Noticed a tiny garden
+              tucked between two buildings I've passed a hundred times…
+            </div>
+            <div class="ss-bar">
+              <div class="ss-fill" style="width: 72%"></div>
+            </div>
+            <div class="ss-count">72 / 200 words</div>
+            <div class="ss-compose" style="margin-top: auto">
+              Post for today ✦
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-label">Your Daily Post</div>
+      </div>
+
+      <!-- Side: Streak -->
+      <div class="screenshot-frame side">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <div class="ss-header">Your streak</div>
+            <div class="ss-big">14</div>
+            <div class="ss-sub">days in a row</div>
+            <div class="ss-cal">
+              <div class="ss-cal-day done">M</div>
+              <div class="ss-cal-day done">T</div>
+              <div class="ss-cal-day done">W</div>
+              <div class="ss-cal-day done">T</div>
+              <div class="ss-cal-day done">F</div>
+              <div class="ss-cal-day done">S</div>
+              <div class="ss-cal-day done">S</div>
+              <div class="ss-cal-day done">M</div>
+              <div class="ss-cal-day done">T</div>
+              <div class="ss-cal-day done">W</div>
+              <div class="ss-cal-day done">T</div>
+              <div class="ss-cal-day done">F</div>
+              <div class="ss-cal-day done">S</div>
+              <div class="ss-cal-day done">S</div>
+              <div class="ss-cal-day today">M</div>
+              <div class="ss-cal-day empty">T</div>
+              <div class="ss-cal-day empty">W</div>
+              <div class="ss-cal-day empty">T</div>
+              <div class="ss-cal-day empty">F</div>
+              <div class="ss-cal-day empty">S</div>
+              <div class="ss-cal-day empty">S</div>
+            </div>
+            <div class="ss-entry" style="margin-top: 8px; font-size: 8px">
+              🔥 Keep going! Post before midnight.
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-label">Streak Tracker</div>
+      </div>
+    </div>
+    <!-- /screenshots -->
+
+    <!-- INSTALL STEPS -->
+    <section class="install-section" id="install">
+      <div class="install-inner">
+        <div class="section-tag" style="text-align: center">How to install</div>
+        <h2 class="section-h">Three steps.<br /><em>Under a minute.</em></h2>
+        <p class="install-intro">
+          Open this page in Safari on your iPhone — it won't work from Chrome or
+          other browsers. Then follow these steps.
+        </p>
+
+        <div class="steps reveal">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Tap the Share button</h3>
+              <p>
+                At the bottom of your Safari browser, tap the Share icon — it
+                looks like a box with an arrow pointing up.
+              </p>
+              <div class="step-tip">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg>
+                Bottom centre of Safari
+              </div>
+            </div>
+            <div class="step-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4b8ef8"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                <polyline points="16 6 12 2 8 6" />
+                <line x1="12" y1="2" x2="12" y2="15" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Tap "Add to Home Screen"</h3>
+              <p>
+                Scroll down in the share sheet until you see
+                <strong>Add to Home Screen</strong>. Tap it.
+              </p>
+              <div class="step-tip">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M12 8v8M8 12h8" />
+                </svg>
+                It has a "+" icon next to it
+              </div>
+            </div>
+            <div class="step-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#4b8ef8"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M12 8v8M8 12h8" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Tap "Add" to confirm</h3>
+              <p>
+                You'll see a preview with the Reflecto name and icon. Tap
+                <strong>Add</strong> in the top-right corner. That's it —
+                Reflecto appears on your Home Screen.
+              </p>
+              <div class="step-tip">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Done in under 10 seconds
+              </div>
+            </div>
+            <div class="step-icon">✦</div>
+          </div>
+        </div>
+
+        <!-- Safari only note -->
+        <div
+          style="
+            margin-top: 32px;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            text-align: left;
+          "
+        >
+          <div style="font-size: 20px; flex-shrink: 0; margin-top: 2px">⚠️</div>
+          <div>
+            <p
+              style="
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--ink);
+                margin-bottom: 4px;
+              "
+            >
+              Must be opened in Safari
+            </p>
+            <p
+              style="font-size: 13px; color: var(--ink-soft); line-height: 1.6"
+            >
+              "Add to Home Screen" only appears in Safari on iOS. If you're in
+              Chrome, Firefox, or another browser, copy the URL and paste it
+              into Safari.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits-section">
+      <div class="benefits-inner">
+        <div class="section-tag reveal">Why install it</div>
+        <h2 class="section-h reveal">
+          Everything an app gives you.<br /><em>Nothing extra.</em>
+        </h2>
+        <div class="benefits-grid">
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">🏠</div>
+            <h3>Lives on your Home Screen</h3>
+            <p>
+              One tap to open — right from your iPhone's Home Screen, just like
+              any other app you love.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">⚡️</div>
+            <h3>Fast & lightweight</h3>
+            <p>
+              No 200 MB download. No App Store approval wait. Reflecto loads
+              instantly and stays out of your way.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">🔔</div>
+            <h3>Push notifications</h3>
+            <p>
+              Get notified when someone in your circle posts, when they react to
+              yours, and a gentle nudge to write.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">📴</div>
+            <h3>Works offline</h3>
+            <p>
+              Write your post even without a connection. It syncs when you're
+              back online — no lost words.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">🔒</div>
+            <h3>No App Store account needed</h3>
+            <p>
+              Skip the Apple ID password prompt. Just open Safari, follow three
+              steps, and you're in.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="benefit-icon">✨</div>
+            <h3>Always up to date</h3>
+            <p>
+              No manual updates. Reflecto updates silently in the background —
+              you always have the latest version.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+    <section class="bottom-cta">
+      <div class="section-tag">You're almost there</div>
+      <h2 class="section-h">Ready to<br /><em>Reflecto?</em></h2>
+      <p class="bottom-cta-sub">
+        Open this page in Safari, follow the three steps above, and your quiet
+        corner of the internet is one tap away.
+      </p>
+      <a href="#install" class="btn-primary">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M12 8v8M8 12h8" />
+        </svg>
+        See install steps
+      </a>
+      <p class="cta-note">Free · No App Store needed · Works on iOS 16.4+</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <a href="index.html" class="footer-logo">✦ Reflecto</a>
+      <div class="footer-links">
+        <a
+          href="https://reflecto.co.in/privacy-policy"
+          target="_blank"
+          rel="noopener"
+          >Privacy</a
+        >
+        <a href="#">Contact</a>
+        <a
+          href="https://play.google.com/store/apps/details?id=com.masterboxer.reflecto"
+          target="_blank"
+          rel="noopener"
+          >Android</a
+        >
+      </div>
+      <p class="footer-copy">© 2026 Reflecto. Made with intention.</p>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          }),
+        { threshold: 0.1 },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      // Stagger benefit cards
+      document.querySelectorAll(".benefit-card").forEach((card, i) => {
+        card.style.transitionDelay = `${i * 0.07}s`;
+      });
+    </script>
+  </body>
+</html>
