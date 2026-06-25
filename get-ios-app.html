@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      // If launched as installed PWA (standalone mode), redirect to the app
+      if (window.navigator.standalone === true) {
+        window.location.replace("https://reflecto.co.in/app/");
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Get Reflecto on iPhone</title>
@@ -900,8 +906,8 @@
         <div class="section-tag" style="text-align: center">How to install</div>
         <h2 class="section-h">Three steps.<br /><em>Under a minute.</em></h2>
         <p class="install-intro">
-          Open this page in Safari on your iPhone — it won't work from Chrome or
-          other browsers. Then follow these steps.
+          Open <strong>reflecto.co.in/app</strong> in Safari on your iPhone,
+          then follow these steps to add it to your Home Screen.
         </p>
 
         <div class="steps reveal">
